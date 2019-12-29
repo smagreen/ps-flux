@@ -24,7 +24,7 @@ const CourseList = props => {
               <td>
                 <Link to={"/course/" + course.slug}>{course.title}</Link>
               </td>
-              <td>{course.authorId}</td>
+              <td>{props.getAuthorName(course.authorId)}</td>
               <td>{course.category}</td>
               <td>
                 {" "}
@@ -47,6 +47,7 @@ const CourseList = props => {
 
 CourseList.propTypes = {
   deleteCourse: PropTypes.func.isRequired,
+  getAuthorName: PropTypes.func.isRequired,
   courses: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
