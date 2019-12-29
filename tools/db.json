@@ -4,7 +4,7 @@
       "id": 1,
       "title": "Securing React Apps with Auth0",
       "slug": "react-auth0-authentication-security",
-      "authorId": 1,
+      "authorId": 4,
       "category": "JavaScript"
     },
     {
@@ -83,6 +83,11 @@
     {
       "id": 3,
       "name": "Dan Wahlin"
+    },
+    {
+      "id": 4,
+      "name": "Steve Green",
+      "createdAt": 1577657750475
     }
   ]
 }

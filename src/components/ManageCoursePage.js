@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 import CourseForm from "./CourseForm";
 import courseStore from "../stores/courseStore";
+import authorStore from "../stores/authorStore";
 import { toast } from "react-toastify";
 import * as courseActions from "../actions/courseActions";
+import * as authorActions from "../actions/authorActions";
 
 // import { Link } from "react-router-dom";
 
 const ManageCoursePage = props => {
   const [errors, setErrors] = useState({});
   const [courses, setCourses] = useState(courseStore.getCourses());
+  const [authors, setAuthors] = useState(authorStore.getAuthors());
   const [course, setCourse] = useState({
     id: null,
     slug: "",
@@ -20,6 +23,7 @@ const ManageCoursePage = props => {
   useEffect(() => {
     courseStore.addChangeListener(onChange);
     const slug = props.match.params.slug;
+    if (authors.length === 0) authorActions.loadAuthors();
     if (courses.length === 0) {
       courseActions.loadCourses();
     } else if (slug) {
@@ -28,10 +32,11 @@ const ManageCoursePage = props => {
     return () => {
       courseStore.removeChangeListener(onChange);
     };
-  }, [courses.length, props.match.params.slug]);
+  }, [courses.length, props.match.params.slug, authors.length]);
 
   const onChange = () => {
     setCourses(courseStore.getCourses());
+    setAuthors(authorStore.getAuthors());
   };
 
   const handleChange = event => {
@@ -68,6 +73,7 @@ const ManageCoursePage = props => {
       <CourseForm
         errors={errors}
         course={course}
+        authors={authors}
         onChange={handleChange}
         onSubmit={handleSubmit}
       />

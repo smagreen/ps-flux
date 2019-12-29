@@ -24,9 +24,12 @@ function CourseForm(props) {
             onChange={props.onChange}
             className="form-control"
           >
-            <option value="" />
+            {props.authors.map(author => {
+              return <option value={author.id}>{author.name}</option>;
+            })}
+            {/* <option value="" />
             <option value="1">Cory House</option>
-            <option value="2">Scott Allen</option>
+            <option value="2">Scott Allen</option> */}
           </select>
         </div>
       </div>
@@ -52,7 +55,8 @@ CourseForm.propTypes = {
   course: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  authors: PropTypes.object.isRequired
 };
 
 export default CourseForm;
