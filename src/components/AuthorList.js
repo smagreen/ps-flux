@@ -2,36 +2,34 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const CourseList = props => {
+const AuthorList = props => {
   return (
     <table className="table">
       <thead>
         <tr>
-          <th>Title</th>
+          <th>Id</th>
           <th>Author</th>
-          <th>Category</th>
           <th>
-            <Link className="btn btn-primary" to="/course">
-              Add Course
+            <Link className="btn btn-primary" to="/author">
+              Add Author
             </Link>
           </th>
         </tr>
       </thead>
       <tbody>
-        {props.courses.map(course => {
+        {props.authors.map(author => {
           return (
-            <tr key={course.id}>
+            <tr key={author.id}>
+              <td>{author.id}</td>
               <td>
-                <Link to={"/course/" + course.slug}>{course.title}</Link>
+                <Link to={"/author/" + author.id}>{author.name}</Link>
               </td>
-              <td>{course.authorId}</td>
-              <td>{course.category}</td>
               <td>
                 {" "}
                 <button
                   className="btn btn-secondary"
                   onClick={() => {
-                    props.deleteCourse(course.id);
+                    props.deleteAuthor(author.id);
                   }}
                 >
                   Delete
@@ -45,20 +43,17 @@ const CourseList = props => {
   );
 };
 
-CourseList.propTypes = {
-  deleteCourse: PropTypes.func.isRequired,
-  courses: PropTypes.arrayOf(
+AuthorList.propTypes = {
+  deleteAuthor: PropTypes.func.isRequired,
+  authors: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      title: PropTypes.string.isRequired,
-      authorId: PropTypes.number.isRequired,
-      category: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired
     })
   ).isRequired
 };
 
-CourseList.defaultProps = {
-  courses: []
+AuthorList.defaultProps = {
+  authors: []
 };
-
-export default CourseList;
+export default AuthorList;

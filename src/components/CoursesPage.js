@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import CourseList from "./CourseList";
 import { loadCourses, deleteCourse } from "../actions/courseActions";
 import courseStore from "../stores/courseStore";
@@ -28,9 +27,7 @@ const CoursePage = () => {
   return (
     <>
       <h2>Courses</h2>
-      <Link className="btn btn-primary" to="/course">
-        Add Course
-      </Link>
+
       <CourseList courses={courses} deleteCourse={handleDelete} />
     </>
   );
