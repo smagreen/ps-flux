@@ -3,8 +3,10 @@ import authorStore from "../stores/authorStore";
 import AuthorForm from "./AuthorForm";
 import { toast } from "react-toastify";
 import * as authorActions from "../actions/authorActions";
+import { useHistory } from "react-router-dom";
 
 const ManageAuthorPage = props => {
+  let history = useHistory();
   const [errors, setErrors] = useState({});
   const [authors, setAuthors] = useState(authorStore.getAuthors());
   const [author, setAuthor] = useState({
@@ -50,7 +52,7 @@ const ManageAuthorPage = props => {
     event.preventDefault();
     if (!formIsValid()) return;
     authorActions.saveAuthor(author).then(() => {
-      props.history.push("/authors");
+      history.goBack();
       toast.success("Author Saved.");
     });
   };
@@ -58,7 +60,7 @@ const ManageAuthorPage = props => {
   const handleCancel = event => {
     event.preventDefault();
     toast.warn("Cancelled");
-    props.history.push("/authors");
+    history.goBack();
   };
 
   return (
